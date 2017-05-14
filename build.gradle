@@ -11,8 +11,9 @@ group 'io.t2l'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
-apply plugin: 'maven-publish'
 apply plugin: "com.jfrog.artifactory"
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.8
 
@@ -22,10 +23,26 @@ repositories {
 
 publishing {
     publications {
-        SharedCode(MavenPublication) {
-            groupId "${project.group}"
-            artifactId "${project.name}"
-            version "${project.version}"
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+if (!project.hasProperty("artifactory_password")) {
+    ext.artifactory_password = "NO PASSWORD"
+}
+artifactory {
+    contextUrl = "http://ci.t2l.io:8081/artifactory"
+    publish {
+        repository {
+            repoKey = "gradle-dev-local"
+            username = "jenkins"
+            password = "${artifactory_password}"
+            maven = true
+        }
+        defaults {
+            publications('mavenJava')
         }
     }
 }
