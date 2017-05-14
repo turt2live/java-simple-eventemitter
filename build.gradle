@@ -1,9 +1,36 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+    }
+}
+
 group 'io.t2l'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
+apply plugin: "com.jfrog.artifactory"
+
 sourceCompatibility = 1.8
+
+artifactory {
+    contextUrl = "http://ci.t2l.io:8081/artifactory"
+    publish {
+        repository {
+            repoKey = 'gradle-dev-local'
+            maven = true
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'gradle-release'
+            maven = true
+        }
+    }
+}
 
 repositories {
     mavenCentral()
