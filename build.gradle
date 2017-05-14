@@ -11,12 +11,23 @@ group 'io.t2l'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'maven-publish'
 apply plugin: "com.jfrog.artifactory"
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+publishing {
+    publications {
+        SharedCode(MavenPublication) {
+            groupId "${project.group}"
+            artifactId "${project.name}"
+            version "${project.version}"
+        }
+    }
 }
 
 dependencies {
