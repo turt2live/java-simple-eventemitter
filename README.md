@@ -1,6 +1,36 @@
 # java-simple-eventemitter
 A library similar to how EventEmitter works in NodeJS.
 
+# Install
+
+Maven:
+
+```
+<repositories>
+    <repository>
+        <name>t2l-repo</name>
+        <url>http://ci.t2l.io:8081/artifactory/gradle-dev-local/</url>
+    </repository>
+</repositories>
+<dependencies>
+    <dependency>
+        <groupId>io.t2l</groupId>
+        <artifactId>EventEmitter</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+</dependencies>
+```
+
+Gradle:
+```
+repositories {
+    maven { url 'http://ci.t2l.io:8081/artifactory/gradle-dev-local/' }
+}
+dependencies {
+    compile 'io.t2l:EventEmitter:1.0-SNAPSHOT'
+}
+```
+
 # Usage
 
 ```java
