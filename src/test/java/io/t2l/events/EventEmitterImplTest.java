@@ -1,8 +1,12 @@
 package io.t2l.events;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class EventEmitterImplTest extends TestCase {
+import static org.junit.Assert.*;
+
+public class EventEmitterImplTest {
+
+    @Test
     public void testSimpleEmit(){
         TestEmitter emitter = new TestEmitter();
         TestHandler handler = new TestHandler();
@@ -15,6 +19,7 @@ public class EventEmitterImplTest extends TestCase {
         assertEquals("Hello World", handler.lastCallResult);
     }
 
+    @Test
     public void testMultipleHandlers(){
         TestEmitter emitter = new TestEmitter();
         TestHandler handler1 = new TestHandler();
@@ -31,6 +36,7 @@ public class EventEmitterImplTest extends TestCase {
         assertEquals("Hello World", handler2.lastCallResult);
     }
 
+    @Test
     public void testNoHandlers(){
         TestEmitter emitter = new TestEmitter();
         TestHandler handler = new TestHandler();
@@ -43,6 +49,7 @@ public class EventEmitterImplTest extends TestCase {
         assertNull(handler.lastCallResult);
     }
 
+    @Test
     public void testErrorCatcher() {
         TestEmitter emitter = new TestEmitter();
         TestHandler errorHandler = new TestHandler();
@@ -57,6 +64,7 @@ public class EventEmitterImplTest extends TestCase {
         assertEquals("TEST THROW", ((RuntimeException)errorHandler.lastCallResult).getMessage());
     }
 
+    @Test
     public void testNullEventName() {
         TestEmitter emitter = new TestEmitter();
         TestHandler handler = new TestHandler();
@@ -69,6 +77,7 @@ public class EventEmitterImplTest extends TestCase {
         assertEquals("test", handler.lastCallResult);
     }
 
+    @Test
     public void testNullEventData() {
         TestEmitter emitter = new TestEmitter();
         TestHandler handler = new TestHandler();
@@ -83,6 +92,7 @@ public class EventEmitterImplTest extends TestCase {
         assertNull(handler.lastCallResult);
     }
 
+    @Test
     public void testMultipleEmitsSameHandler() {
         TestEmitter emitter = new TestEmitter();
         TestHandler handler = new TestHandler();
@@ -100,6 +110,7 @@ public class EventEmitterImplTest extends TestCase {
         assertEquals("test2", handler.lastCallResult);
     }
 
+    @Test
     public void testHandlerAddedAfterEmit() {
         TestEmitter emitter = new TestEmitter();
         TestHandler handler1 = new TestHandler();
@@ -124,6 +135,7 @@ public class EventEmitterImplTest extends TestCase {
         assertEquals("test2", handler2.lastCallResult);
     }
 
+    @Test
     public void testCaseMatters() {
         TestEmitter emitter = new TestEmitter();
         TestHandler lowercaseHandler = new TestHandler();
